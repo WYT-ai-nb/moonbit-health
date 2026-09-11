@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "deps": {},
   "readme": "README.md",
-  "repository": "https://github.com/moonbit-community/moonbit-health",
+  "repository": "https://github.com/WYT-ai-nb/moonbit-health",
   "license": "Apache-2.0",
   "keywords": ["moonbit", "quality", "cli", "hackathon"]
 }
