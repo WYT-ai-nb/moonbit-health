@@ -49,3 +49,14 @@ pub fn finding(
 ) -> Finding {
   { rule_id, severity, message, path }
 }
+
+///|
+pub fn count_severity(report : HealthReport, target : Severity) -> Int {
+  let mut total = 0
+  for item in report.findings {
+    if item.severity == target {
+      total = total + 1
+    }
+  }
+  total
+}
