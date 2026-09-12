@@ -4,6 +4,8 @@ MoonBit Health is a small quality gate for MoonBit open-source projects. It chec
 
 The first hackathon version focuses on a deterministic rule engine written in MoonBit. It analyzes a project snapshot, returns structured findings, and formats both text and JSON reports. The next milestone is a native CLI adapter that reads the real file system and Git metadata.
 
+Rule details are documented in [`docs/RULES.md`](docs/RULES.md). Contributors can use [`CONTRIBUTING.md`](CONTRIBUTING.md) to follow the project workflow.
+
 ## Usage
 
 Run the demo report:
@@ -58,6 +60,10 @@ The September deliverable includes:
 - Add Mooncakes publishing checks
 - Add custom rule configuration
 - Add JSON schema for machine-readable reports
+
+## Test Fixtures
+
+The `fixtures/` directory contains small healthy and incomplete project examples used to explain rule behavior and guide future file-system scanning work.
 
 ## License
 
