@@ -26,7 +26,8 @@ fn content_of(project : ProjectSnapshot, path : String) -> String? {
 ///|
 fn has_any_license(project : ProjectSnapshot) -> Bool {
   has_file(project, "LICENSE") || has_file(project, "LICENSE.md") ||
-  has_file(project, "COPYING")
+  has_file(project, "LICENSE.txt") || has_file(project, "COPYING") ||
+  has_file(project, "COPYING.md")
 }
 
 ///|

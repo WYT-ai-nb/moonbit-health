@@ -47,3 +47,15 @@ test "severity counts summarize a report" {
   inspect(count_severity(report, Warning), content="2")
   inspect(count_severity(report, Info), content="1")
 }
+
+///|
+test "common license filename variants are accepted" {
+  let project = snapshot([
+    file("moon.mod.json", "{}"),
+    file("src/moon.pkg.json", "{}"),
+    file("README.md", "Usage\nmoon test"),
+    file("LICENSE.txt", "Apache-2.0"),
+  ])
+  let report = analyze(project)
+  inspect(report.findings.any(fn(item) { item.rule_id == "MBH005" }), content="false")
+}
