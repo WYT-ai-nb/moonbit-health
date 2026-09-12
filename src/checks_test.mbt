@@ -39,3 +39,11 @@ test "missing required files lower the score" {
   inspect(report.score, content="25")
   inspect(report.findings.length(), content="7")
 }
+
+///|
+test "severity counts summarize a report" {
+  let report = analyze(snapshot([]))
+  inspect(count_severity(report, Error), content="4")
+  inspect(count_severity(report, Warning), content="2")
+  inspect(count_severity(report, Info), content="1")
+}
