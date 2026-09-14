@@ -1,8 +1,8 @@
-# MoonBit Health
+# MoonBit Maintainer Compass
 
-MoonBit Health is a small quality gate for MoonBit open-source projects. It checks whether a project is easy for maintainers, reviewers, and AI coding agents to build, test, inspect, and publish.
+MoonBit Maintainer Compass is a deterministic handoff and release-readiness checker for MoonBit open-source projects. Its focus is not package discovery or dependency management. It answers a maintainer's practical question: can another contributor understand, verify, and continue this repository today?
 
-The first hackathon version focuses on a deterministic rule engine written in MoonBit. It analyzes a project snapshot, returns structured findings, and formats both text and JSON reports. The next milestone is a native CLI adapter that reads the real file system and Git metadata.
+The first version is a pure MoonBit rule engine. It analyzes an in-memory project snapshot, returns structured findings, and formats text and JSON reports. The rules cover handoff documents, reproducible commands, tests, change history, license, and CI. Because the engine is pure, it can later be used by a CLI, an editor extension, or a GitHub Action without changing the rules.
 
 Rule details are documented in [`docs/RULES.md`](docs/RULES.md). Contributors can use [`CONTRIBUTING.md`](CONTRIBUTING.md) to follow the project workflow.
 
@@ -39,6 +39,10 @@ No findings.
 | MBH005 | error | license file exists |
 | MBH006 | warning | tests are present |
 | MBH007 | info | examples or runnable `cmd/` package exists |
+| MBH008 | warning | contributor or maintainer handoff guide exists |
+| MBH009 | warning | changelog or history file exists |
+| MBH010 | info | GitHub Actions workflow exists |
+| MBH011 | warning | README includes both test and demo commands |
 
 ## Hackathon Scope
 
@@ -49,6 +53,7 @@ The September deliverable includes:
 - MoonBit data model for project snapshots and findings
 - MoonBit rule engine with deterministic scoring
 - Text and JSON report formatting
+- Maintainer handoff and release-readiness rules distinct from package publishing
 - Unit tests covering healthy and incomplete projects
 - Example command package
 - Public README, license, roadmap, and project proposal

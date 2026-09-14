@@ -5,6 +5,15 @@ pub enum Severity {
   Error
 } derive(Show, Eq)
 
+///| Return the error level for callers that need to summarize a report.
+pub fn severity_error() -> Severity { Error }
+
+///| Return the warning level for callers that need to summarize a report.
+pub fn severity_warning() -> Severity { Warning }
+
+///| Return the informational level for callers that need to summarize a report.
+pub fn severity_info() -> Severity { Info }
+
 ///|
 pub struct ProjectFile {
   path : String

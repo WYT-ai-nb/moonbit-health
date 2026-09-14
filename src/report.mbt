@@ -38,7 +38,9 @@ pub fn format_json(report : HealthReport) -> String {
   }
   if report.findings.length() > 0 {
     out = out + "\n  ]\n}"
+    out
   } else {
     out = out + "]\n}"
+    out
   }
 }

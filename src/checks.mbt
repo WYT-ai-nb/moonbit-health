@@ -5,12 +5,12 @@ fn has_file(project : ProjectSnapshot, path : String) -> Bool {
 
 ///|
 fn has_prefix(project : ProjectSnapshot, prefix : String) -> Bool {
-  project.files.any(fn(f) { f.path.starts_with(prefix) })
+  project.files.any(fn(f) { f.path.has_prefix(prefix) })
 }
 
 ///|
 fn has_suffix(project : ProjectSnapshot, suffix : String) -> Bool {
-  project.files.any(fn(f) { f.path.ends_with(suffix) })
+  project.files.any(fn(f) { f.path.has_suffix(suffix) })
 }
 
 ///|
@@ -38,7 +38,7 @@ fn has_moon_package(project : ProjectSnapshot) -> Bool {
 ///|
 fn has_tests(project : ProjectSnapshot) -> Bool {
   project.files.any(fn(f) {
-    f.path.ends_with("_test.mbt") || f.content.contains("test \"") ||
+    f.path.has_suffix("_test.mbt") || f.content.contains("test \"") ||
     f.content.contains("test {")
   })
 }
@@ -47,6 +47,25 @@ fn has_tests(project : ProjectSnapshot) -> Bool {
 fn has_examples(project : ProjectSnapshot) -> Bool {
   has_prefix(project, "examples/") || has_prefix(project, "example/") ||
   has_prefix(project, "cmd/")
+}
+
+fn has_ci_workflow(project : ProjectSnapshot) -> Bool {
+  has_prefix(project, ".github/workflows/")
+}
+
+fn has_maintainer_docs(project : ProjectSnapshot) -> Bool {
+  has_file(project, "CONTRIBUTING.md") || has_file(project, "MAINTAINERS.md")
+}
+
+fn has_change_history(project : ProjectSnapshot) -> Bool {
+  has_file(project, "CHANGELOG.md") || has_file(project, "HISTORY.md")
+}
+
+fn readme_mentions_reproducibility(project : ProjectSnapshot) -> Bool {
+  match content_of(project, "README.md") {
+    Some(text) => text.contains("moon test") && text.contains("moon run")
+    None => false
+  }
 }
 
 ///|
@@ -71,6 +90,7 @@ fn push_if_missing(
     findings
   } else {
     findings.push(finding(rule_id, severity, message, path))
+    findings
   }
 }
 
@@ -132,6 +152,38 @@ pub fn analyze(project : ProjectSnapshot) -> HealthReport {
     Info,
     "examples or a runnable cmd package help reviewers try the project",
     "examples/",
+  )
+  findings = push_if_missing(
+    findings,
+    has_maintainer_docs(project),
+    "MBH008",
+    Warning,
+    "a maintainer guide is needed for project handoff",
+    "CONTRIBUTING.md",
+  )
+  findings = push_if_missing(
+    findings,
+    has_change_history(project),
+    "MBH009",
+    Warning,
+    "a changelog helps reviewers understand project progress",
+    "CHANGELOG.md",
+  )
+  findings = push_if_missing(
+    findings,
+    has_ci_workflow(project),
+    "MBH010",
+    Info,
+    "a GitHub Actions workflow makes verification repeatable",
+    ".github/workflows/",
+  )
+  findings = push_if_missing(
+    findings,
+    readme_mentions_reproducibility(project),
+    "MBH011",
+    Warning,
+    "README should show both test and demo commands",
+    "README.md",
   )
   { score: score(findings), findings }
 }
