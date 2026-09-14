@@ -66,3 +66,10 @@ test "common license filename variants are accepted" {
   let report = analyze(project)
   inspect(report.findings.any(fn(item) { item.rule_id == "MBH005" }), content="false")
 }
+
+///|
+test "handoff plan explains the next maintainer's actions" {
+  let report = analyze(snapshot([]))
+  inspect(format_handoff(report).contains("Handoff Plan"), content="true")
+  inspect(format_handoff(report).contains("MBH001"), content="true")
+}

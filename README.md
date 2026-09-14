@@ -1,8 +1,8 @@
 # MoonBit Maintainer Compass
 
-MoonBit Maintainer Compass is a deterministic handoff and release-readiness checker for MoonBit open-source projects. Its focus is not package discovery or dependency management. It answers a maintainer's practical question: can another contributor understand, verify, and continue this repository today?
+MoonBit Maintainer Compass is a deterministic handoff-plan generator for MoonBit open-source projects. Its focus is not package discovery, dependency management, or package publishing. It answers a maintainer's practical question: what must be prepared before another contributor can continue this repository?
 
-The first version is a pure MoonBit rule engine. It analyzes an in-memory project snapshot, returns structured findings, and formats text and JSON reports. The rules cover handoff documents, reproducible commands, tests, change history, license, and CI. Because the engine is pure, it can later be used by a CLI, an editor extension, or a GitHub Action without changing the rules.
+The first version is a pure MoonBit rule engine. It analyzes an in-memory project snapshot, returns structured findings, and produces a prioritized handoff plan in addition to text and JSON reports. The rules cover contributor guidance, reproducible commands, tests, change history, license, and CI. Because the engine is pure, it can later be used by a CLI, an editor extension, or a GitHub Action without changing the rules.
 
 Rule details are documented in [`docs/RULES.md`](docs/RULES.md). Contributors can use [`CONTRIBUTING.md`](CONTRIBUTING.md) to follow the project workflow.
 
@@ -53,10 +53,15 @@ The September deliverable includes:
 - MoonBit data model for project snapshots and findings
 - MoonBit rule engine with deterministic scoring
 - Text and JSON report formatting
-- Maintainer handoff and release-readiness rules distinct from package publishing
+- Maintainer handoff rules distinct from package checking and package publishing
+- A handoff-plan output that tells the next maintainer which repository material to prepare
 - Unit tests covering healthy and incomplete projects
 - Example command package
 - Public README, license, roadmap, and project proposal
+
+## Boundary With Similar Tools
+
+Tools such as `cakecheck` focus on checking package or project quality. Maintainer Compass has a different output and workflow: it creates a continuation plan for a human maintainer, centered on contributor onboarding, reproducible verification, change history, and CI handoff. It does not publish packages, index dependencies, or replace a package manager.
 
 ## Roadmap
 

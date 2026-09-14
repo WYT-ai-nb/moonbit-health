@@ -44,3 +44,19 @@ pub fn format_json(report : HealthReport) -> String {
     out
   }
 }
+
+///| Turn findings into a short handoff plan for the next maintainer.
+pub fn format_handoff(report : HealthReport) -> String {
+  let mut out = "MoonBit Maintainer Compass - Handoff Plan\n"
+  out = out + "Readiness: " + report.score.to_string() + "/100\n"
+  if report.findings.length() == 0 {
+    out + "Next maintainer can build, test, and review this project.\n"
+  } else {
+    out = out + "Before handoff:\n"
+    for item in report.findings {
+      out = out + "- " + item.rule_id + ": " + item.message +
+        " (target: " + item.path + ")\n"
+    }
+    out
+  }
+}

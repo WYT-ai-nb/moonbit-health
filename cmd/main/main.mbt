@@ -13,5 +13,6 @@ fn main {
   ])
   let report = @health.analyze(sample)
   println(@health.format_text(report))
+  println(@health.format_handoff(report))
   println(@health.format_json(report))
 }
