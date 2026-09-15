@@ -15,4 +15,14 @@ fn main {
   println(@health.format_text(report))
   println(@health.format_handoff(report))
   println(@health.format_json(report))
+  let handoff = @health.plan_from_report(report)
+  println(@health.format_markdown(handoff))
+  println(@health.format_plan_json(handoff))
+  println(@health.format_git_text(@health.demo_git_audit()))
+  println(@health.format_gate(@health.build_gate(
+    "MoonBit Maintainer Compass",
+    report,
+    @health.demo_git_audit(),
+    handoff,
+  )))
 }
