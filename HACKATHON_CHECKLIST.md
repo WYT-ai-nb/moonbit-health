@@ -4,27 +4,27 @@ Use this file to track September work in public commits.
 
 ## Before Registration
 
-- [ ] Create a public GitHub repository
-- [ ] Push this initial project
-- [ ] Update `moon.mod.json` repository field
-- [ ] Submit repository URL and project proposal
+- [x] Create a public GitHub repository
+- [x] Push the current project
+- [x] Update `moon.mod.json` repository field
+- [x] Prepare repository URL and project proposal
 - [ ] Join the official event group
 
 ## Development Evidence
 
-- [ ] Open issues for each milestone
-- [ ] Use pull requests or clearly named commits
-- [ ] Keep a short development note for every major change
-- [ ] Mark which work was completed during September
+- [x] Use clearly named commits for milestones
+- [x] Keep development notes for the major changes
+- [x] Mark current work completed during September
+- [ ] Open issues for each future milestone
 
 ## Acceptance
 
-- [ ] `moon test` passes
-- [ ] `moon run cmd/main` prints a report
-- [ ] README includes usage, rules, and roadmap
-- [ ] License is present
-- [ ] Tests cover healthy and incomplete projects
-- [ ] Final submission includes screenshots or terminal output
+- [x] `moon test` passes
+- [x] `moon run cmd/main` prints a report and release gate
+- [x] README includes usage, rules, and roadmap
+- [x] License is present
+- [x] Tests cover healthy and incomplete projects
+- [x] Final submission includes terminal output in the proposal workflow
 
 ## Suggested September Milestones
 

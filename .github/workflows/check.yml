@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: moonbitlang/setup-moonbit@v1
+      - uses: hustcer/setup-moonbit@v1
       - run: moon test
       - run: moon run cmd/main

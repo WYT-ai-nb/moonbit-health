@@ -1,30 +1,32 @@
-# Project Proposal: MoonBit Health
+# Project Proposal: MoonBit Maintainer Compass
 
 ## Goal
 
-MoonBit Health helps MoonBit developers prepare open-source projects for review, reuse, and publication. It checks common project quality signals and produces a readable report that can be used locally or in CI.
+MoonBit Maintainer Compass is a deterministic tool for preparing a MoonBit open-source project for maintainer handoff. It checks the project snapshot, collaboration documents, reproducible commands, Git status, and recent commit risks, then produces a prioritized plan for the next maintainer.
 
 ## Problem
 
-Many ecosystem packages are hard to evaluate because they miss one or more of the basics: clear usage instructions, tests, license files, examples, or package metadata. Reviewers and contributors need a quick way to see whether a repository is ready for use.
+An open-source project may build correctly and still be difficult to continue. New maintainers need to know which documents to read, which commands to run, whether the branch is synchronized, and which tasks must be completed before release. These signals are often scattered across a repository.
 
 ## September Scope
 
-- Implement the core checker in MoonBit
-- Model project files, findings, severity, and reports
-- Provide built-in rules for metadata, README, license, tests, and examples
-- Provide text and JSON report formatting
-- Include tests and sample fixtures
-- Document usage, rule semantics, and future work
+- Model project files, findings, Git audits, handoff tasks, and release gates in MoonBit.
+- Implement deterministic rules for metadata, README, license, tests, examples, contributor guidance, changelog, and CI.
+- Produce text, JSON, Markdown, Git audit, and pass/review/block release-gate output.
+- Include healthy and incomplete fixtures plus 43 unit tests.
+
+## Boundary
+
+This project does not publish packages, build a dependency index, or replace a package manager. Its distinct output is a human-oriented continuation plan for a maintainer. Package checking and package publishing are outside the current scope.
 
 ## Acceptance Criteria
 
-- `moon test` runs the rule-engine tests
-- `moon run cmd/main` prints a sample health report
-- The README explains usage and rules
-- The repository uses an OSI-approved license
-- The development history can show meaningful MoonBit work during the hackathon period
+- `moon test` passes all tests.
+- `moon run cmd/main` prints a health report, handoff plan, Git audit, and release gate.
+- The README explains the rules and usage.
+- The repository includes a license, contributor guide, changelog, CI workflow, and proposal.
+- The project contains more than 1000 effective MoonBit source lines.
 
 ## Future Work
 
-The next iteration will add a native CLI file-system adapter, Git metadata checks, Mooncakes compatibility checks, and GitHub Actions annotations.
+The next iteration will add real file-system scanning, command-line arguments, configurable rules, GitHub Action annotations, and pull-request review mode.
