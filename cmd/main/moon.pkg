@@ -1,0 +1,7 @@
+import {
+  "moonbitlang/core/env",
+  "moonbit-community/moonbit-health/src" @health,
+  "moonbitlang/x/sys",
+}
+
+pkgtype(kind: "executable")

@@ -1,4 +1,6 @@
 .mooncakes/
 _build/
+moonbit-health-report.json
+moonbit-health-report.md
 .moon/
 *.log

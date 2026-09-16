@@ -1,9 +1,0 @@
-{
-  "import": [
-    {
-      "path": "moonbit-community/moonbit-health/src",
-      "alias": "health"
-    }
-  ],
-  "is-main": true
-}

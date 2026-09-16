@@ -26,17 +26,20 @@ test "missing tests and usage are reported" {
   ])
   let report = analyze(project)
   inspect(report.score, content="40")
-  inspect(format_text(report), content=
-    #|MoonBit Health Report
-    #|Score: 40/100
-    #|- [warning] MBH004 README.md: README should include usage or verification commands
-    #|- [warning] MBH006 *_test.mbt: tests are expected for hackathon verification
-    #|- [info] MBH007 examples/: examples or a runnable cmd package help reviewers try the project
-    #|- [warning] MBH008 CONTRIBUTING.md: a maintainer guide is needed for project handoff
-    #|- [warning] MBH009 CHANGELOG.md: a changelog helps reviewers understand project progress
-    #|- [info] MBH010 .github/workflows/: a GitHub Actions workflow makes verification repeatable
-    #|- [warning] MBH011 README.md: README should show both test and demo commands
-    #|
+  inspect(
+    format_text(report),
+    content=(
+      #|MoonBit Health Report
+      #|Score: 40/100
+      #|- [warning] MBH004 README.md: README should include usage or verification commands
+      #|- [warning] MBH006 *_test.mbt: tests are expected for hackathon verification
+      #|- [info] MBH007 examples/: examples or a runnable cmd package help reviewers try the project
+      #|- [warning] MBH008 CONTRIBUTING.md: a maintainer guide is needed for project handoff
+      #|- [warning] MBH009 CHANGELOG.md: a changelog helps reviewers understand project progress
+      #|- [info] MBH010 .github/workflows/: a GitHub Actions workflow makes verification repeatable
+      #|- [warning] MBH011 README.md: README should show both test and demo commands
+      #|
+    ),
   )
 }
 
@@ -64,7 +67,26 @@ test "common license filename variants are accepted" {
     file("LICENSE.txt", "Apache-2.0"),
   ])
   let report = analyze(project)
-  inspect(report.findings.any(fn(item) { item.rule_id == "MBH005" }), content="false")
+  inspect(
+    report.findings.any(fn(item) { item.rule_id == "MBH005" }),
+    content="false",
+  )
+}
+
+///|
+test "new module and package filenames are accepted" {
+  let project = snapshot([
+    file("moon.mod", "name = \"demo/project\""),
+    file("src/moon.pkg", "import {}"),
+    file("README.md", "Usage\nmoon test\nmoon run cmd/main"),
+    file("LICENSE", "Apache-2.0"),
+    file("src/app_test.mbt", "test { assert_true(true) }"),
+    file("cmd/main/main.mbt", "fn main { println(\"ok\") }"),
+    file("CONTRIBUTING.md", "guide"),
+    file("CHANGELOG.md", "history"),
+    file(".github/workflows/check.yml", "moon test"),
+  ])
+  inspect(analyze(project).findings.length(), content="0")
 }
 
 ///|

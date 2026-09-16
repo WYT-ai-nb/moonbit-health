@@ -5,19 +5,29 @@ pub enum Severity {
   Error
 } derive(Show, Eq)
 
-///| Return the error level for callers that need to summarize a report.
-pub fn severity_error() -> Severity { Error }
+///|
+/// Return the error level for callers that need to summarize a report.
+pub fn severity_error() -> Severity {
+  Error
+}
 
-///| Return the warning level for callers that need to summarize a report.
-pub fn severity_warning() -> Severity { Warning }
+///|
+/// Return the warning level for callers that need to summarize a report.
+pub fn severity_warning() -> Severity {
+  Warning
+}
 
-///| Return the informational level for callers that need to summarize a report.
-pub fn severity_info() -> Severity { Info }
+///|
+/// Return the informational level for callers that need to summarize a report.
+pub fn severity_info() -> Severity {
+  Info
+}
 
 ///|
 pub struct ProjectFile {
   path : String
   content : String
+  size : Int64
 } derive(Show, Eq)
 
 ///|
@@ -41,12 +51,21 @@ pub struct HealthReport {
 
 ///|
 pub fn file(path : String, content : String) -> ProjectFile {
-  { path, content }
+  { path, content, size: content.length().to_int64(), }
+}
+
+///|
+pub fn file_with_size(
+  path : String,
+  content : String,
+  size : Int64,
+) -> ProjectFile {
+  { path, content, size, }
 }
 
 ///|
 pub fn snapshot(files : Array[ProjectFile]) -> ProjectSnapshot {
-  { files }
+  { files, }
 }
 
 ///|
@@ -54,9 +73,15 @@ pub fn finding(
   rule_id : String,
   severity : Severity,
   message : String,
-  path : String
+  path : String,
 ) -> Finding {
-  { rule_id, severity, message, path }
+  { rule_id, severity, message, path, }
+}
+
+///|
+/// Construct a report for callers that already have a finding list.
+pub fn health_report(score : Int, findings : Array[Finding]) -> HealthReport {
+  { score, findings, }
 }
 
 ///|

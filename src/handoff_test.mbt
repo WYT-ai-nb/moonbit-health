@@ -1,8 +1,30 @@
+///|
 fn sample_plan() -> HandoffPlan {
   plan("Compass demo", "maintainer", [
-    task("DOC", "read the contributor guide", "Understand the workflow", priority_p0(), kind_understand(), "CONTRIBUTING.md"),
-    task("TEST", "run the verification commands", "Check reproducibility", priority_p1(), kind_verify(), "README.md"),
-    task("LOG", "review recent changes", "Understand project history", priority_p2(), kind_document(), "CHANGELOG.md"),
+    task(
+      "DOC",
+      "read the contributor guide",
+      "Understand the workflow",
+      priority_p0(),
+      kind_understand(),
+      "CONTRIBUTING.md",
+    ),
+    task(
+      "TEST",
+      "run the verification commands",
+      "Check reproducibility",
+      priority_p1(),
+      kind_verify(),
+      "README.md",
+    ),
+    task(
+      "LOG",
+      "review recent changes",
+      "Understand project history",
+      priority_p2(),
+      kind_document(),
+      "CHANGELOG.md",
+    ),
   ])
 }
 
@@ -57,7 +79,10 @@ test "empty plan is ready" {
 
 ///|
 test "notes are included in markdown" {
-  let value = add_note(sample_plan(), "Ask the community for a second reviewer.")
+  let value = add_note(
+    sample_plan(),
+    "Ask the community for a second reviewer.",
+  )
   let text = format_markdown(value)
   inspect(text.contains("Ask the community"), content="true")
   inspect(text.contains("# Maintainer Handoff Plan"), content="true")
