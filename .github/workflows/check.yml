@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: hustcer/setup-moonbit@v1
+      - run: moon update
       - run: moon test
       - run: moon run cmd/main -- --root . --profile release --format json --output moonbit-health-report.json --fail-on-policy
       - run: moon run cmd/main -- --root . --profile release --format markdown --output moonbit-health-report.md --fail-on-policy
